@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const dateFrom = document.getElementById("dateFrom").value;
     const dateTo = document.getElementById("dateTo").value;
     const persons = document.getElementById("persons").value;
-    const maxHotels = parseInt(document.getElementById("maxHotels").value || "3");
 
     // Dummy hotels per category
     const hotels = {
@@ -23,19 +22,14 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     resultsDiv.innerHTML = "";
-    let count = 0;
 
     for (const [category, hotelList] of Object.entries(hotels)) {
-      if (count >= maxHotels) break;
-
       const section = document.createElement("div");
       section.innerHTML = `<h3>${category}</h3>`;
       let list = "<ul>";
 
       for (let h of hotelList) {
-        if (count >= maxHotels) break;
         list += `<li><strong>${h}</strong> in ${dest} from ${dateFrom} to ${dateTo} for ${persons} person(s)</li>`;
-        count++;
       }
 
       list += "</ul>";
