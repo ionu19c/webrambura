@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>We Brambura</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>We Brambura</h1>
+  <p class="subtitle">Travel your way. Mix your stay.</p>
+
+  <div id="searchPage">
+    <form id="stayForm">
+      <label>Destination:
+        <input type="text" id="dest" required />
+      </label><br/>
+      <label>Check-in:
+        <input type="date" id="dateFrom" required />
+      </label><br/>
+      <label>Check-out:
+        <input type="date" id="dateTo" required />
+      </label><br/>
+      <label>Persons:
+        <input type="number" id="persons" min="1" value="1" required />
+      </label><br/>
+      <label>Max Hotels:
+        <input type="number" id="maxHotels" min="1" value="1" />
+      </label><br/><br/>
+      <button type="submit">Find my stay</button>
+    </form>
+  </div>
+
+  <div id="resultsPage" style="display:none;">
+    <button id="backBtn">← Back to Search</button>
+    <div id="results"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
