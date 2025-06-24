@@ -1,38 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>We Brambura</title>
+  <title>We Brambura 🌍</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>We Brambura</h1>
-  <p class="subtitle">Travel your way. Mix your stay.</p>
+  <h1>We Brambura 🧳</h1>
+  <p class="subtitle">Compară planuri de sejur: Smart, Balanced, Premium</p>
 
-  <div id="searchPage">
-    <form id="stayForm">
-      <label>Destination:
-        <input type="text" id="dest" required />
-      </label><br/>
-      <label>Check-in:
-        <input type="date" id="dateFrom" required />
-      </label><br/>
-      <label>Check-out:
-        <input type="date" id="dateTo" required />
-      </label><br/>
-      <label>Persons:
-        <input type="number" id="persons" min="1" value="1" required />
-      </label><br/>
-      <label>Max Hotels:
-        <input type="number" id="maxHotels" min="1" value="1" />
-      </label><br/><br/>
-      <button type="submit">Find my stay</button>
-    </form>
-  </div>
+  <form id="stayForm">
+    <div id="errorMessage" style="color: crimson; display: none;"></div>
 
-  <div id="resultsPage" style="display:none;">
-    <button id="backBtn">← Back to Search</button>
+    <label for="dest">Destinație:</label>
+    <input type="text" id="dest" placeholder="ex: Paris" required />
+
+    <label for="dateFrom">De la:</label>
+    <input type="date" id="dateFrom" required />
+
+    <label for="dateTo">Până la:</label>
+    <input type="date" id="dateTo" required />
+
+    <label for="persons">Număr de persoane:</label>
+    <input type="number" id="persons" min="1" value="1" required />
+
+    <label for="maxHotels">Câte hoteluri vrei să combini?</label>
+    <input type="number" id="maxHotels" min="1" max="5" value="2" required />
+
+    <button type="submit">Generează planuri 🏨</button>
+  </form>
+
+  <div id="searchPage"></div>
+
+  <div id="resultsPage" style="display: none;">
+    <button id="backBtn">🔙 Înapoi</button>
     <div id="results"></div>
   </div>
 
