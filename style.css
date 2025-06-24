@@ -115,6 +115,24 @@ button:hover {
   background-color: #ddd;
 }
 
+.rating {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.rating.excellent {
+  color: #2e7d32;
+}
+.rating.very-good {
+  color: #0277bd;
+}
+.rating.good {
+  color: #f9a825;
+}
+.rating.average {
+  color: #e65100;
+}
+
 @media screen and (max-width: 600px) {
   form,
   #results > div {
@@ -139,21 +157,4 @@ button:hover {
     transform: translateY(0);
     opacity: 1;
   }
-}
-.rating {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.rating.excellent {
-  color: #2e7d32; /* verde închis */
-}
-.rating.very-good {
-  color: #0277bd; /* albastru */
-}
-.rating.good {
-  color: #f9a825; /* galben/portocaliu */
-}
-.rating.average {
-  color: #e65100; /* portocaliu închis */
 }
