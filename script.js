@@ -8,10 +8,19 @@ document.addEventListener("DOMContentLoaded", function () {
   const hotels = [
     { name: "Budget Inn", category: "💸 Smart Saver", price: 80 },
     { name: "Saver Stay", category: "💸 Smart Saver", price: 75 },
+    { name: "Value Lodge", category: "💸 Smart Saver", price: 85 },
     { name: "Urban Rest", category: "⚖️ Balanced Choice", price: 110 },
     { name: "Comfort Square", category: "⚖️ Balanced Choice", price: 105 },
+    { name: "MidTown Hotel", category: "⚖️ Balanced Choice", price: 115 },
     { name: "Grand Brambura", category: "💎 Premium Escape", price: 160 },
-    { name: "Royal Retreat", category: "💎 Premium Escape", price: 180 }
+    { name: "Royal Retreat", category: "💎 Premium Escape", price: 180 },
+    { name: "Luxury Loft", category: "💎 Premium Escape", price: 175 }
+  ];
+
+  const categories = [
+    { name: "💸 Smart Saver", label: "Smart Saver", sort: (a, b) => a.price - b.price },
+    { name: "⚖️ Balanced Choice", label: "Balanced", sort: (a, b) => a.price - b.price },
+    { name: "💎 Premium Escape", label: "Premium", sort: (a, b) => b.price - a.price }
   ];
 
   form.addEventListener("submit", function (e) {
@@ -21,57 +30,54 @@ document.addEventListener("DOMContentLoaded", function () {
     const dateFrom = new Date(document.getElementById("dateFrom").value);
     const dateTo = new Date(document.getElementById("dateTo").value);
     const persons = parseInt(document.getElementById("persons").value);
+    const maxHotels = parseInt(document.getElementById("maxHotels").value || "2");
 
     const oneDay = 1000 * 60 * 60 * 24;
     const totalNights = Math.round((dateTo - dateFrom) / oneDay);
 
     if (totalNights < 1 || isNaN(persons)) {
-      alert("Date invalide sau perioadă prea scurtă.");
+      alert("Date invalide.");
       return;
     }
 
-    // Selectăm câte un hotel din fiecare categorie (cel mai ieftin)
-    const categories = ["💸 Smart Saver", "⚖️ Balanced Choice", "💎 Premium Escape"];
-    const selectedHotels = categories.map(cat =>
-      hotels
-        .filter(h => h.category === cat)
-        .sort((a, b) => a.price - b.price)[0]
-    ).filter(Boolean); // exclude undefined dacă o categorie lipsește
+    resultsDiv.innerHTML = "";
 
-    const hotelCount = selectedHotels.length;
-    const baseNights = Math.floor(totalNights / hotelCount);
-    const remainder = totalNights % hotelCount;
+    const formatDate = d => `${d.getDate().toString().padStart(2, "0")}.${(d.getMonth() + 1).toString().padStart(2, "0")}`;
 
-    let currentStart = new Date(dateFrom);
-    let totalCost = 0;
-    let output = "";
+    categories.forEach(cat => {
+      const matching = hotels.filter(h => h.category === cat.name).sort(cat.sort);
+      const selected = matching.slice(0, maxHotels);
+      if (selected.length === 0) return;
 
-    const format = d => `${d.getDate().toString().padStart(2, "0")}.${(d.getMonth() + 1).toString().padStart(2, "0")}`;
+      const perHotelNights = Math.floor(totalNights / selected.length);
+      const extra = totalNights % selected.length;
+      let currentStart = new Date(dateFrom);
+      let categoryOutput = `<h2>${cat.name} – ${cat.label}</h2>`;
+      let categoryCost = 0;
 
-    selectedHotels.forEach((hotel, i) => {
-      const stayNights = baseNights + (i < remainder ? 1 : 0);
-      const endDate = new Date(currentStart);
-      endDate.setDate(currentStart.getDate() + stayNights);
+      selected.forEach((hotel, i) => {
+        const nights = perHotelNights + (i < extra ? 1 : 0);
+        const endDate = new Date(currentStart);
+        endDate.setDate(currentStart.getDate() + nights);
 
-      const subtotal = hotel.price * stayNights * persons;
-      totalCost += subtotal;
+        const subtotal = hotel.price * nights * persons;
+        categoryCost += subtotal;
 
-      output += `
-        <div>
-          <h3>${hotel.category}</h3>
-          <p><strong>${hotel.name}</strong> in ${dest}</p>
-          <p>🗓️ ${format(currentStart)} → ${format(endDate)} (${stayNights} nopți)</p>
-          <p>💶 ${hotel.price}€/noapte × ${stayNights} nopți × ${persons} pers. = <strong>${subtotal}€</strong></p>
-        </div>
-        <hr/>
-      `;
+        categoryOutput += `
+          <div>
+            <h3>${hotel.name}</h3>
+            <p>📍 ${dest}</p>
+            <p>🗓️ ${formatDate(currentStart)} → ${formatDate(endDate)} (${nights} nopți)</p>
+            <p>💶 ${hotel.price}€/noapte × ${nights} × ${persons} pers = <strong>${subtotal}€</strong></p>
+          </div><hr/>
+        `;
+        currentStart = endDate;
+      });
 
-      currentStart = endDate;
+      categoryOutput += `<h3>💰 Total ${cat.label}: ${categoryCost}€</h3><br/>`;
+      resultsDiv.innerHTML += categoryOutput;
     });
 
-    output += `<h3>💰 Total estimativ: ${totalCost}€</h3>`;
-
-    resultsDiv.innerHTML = output;
     searchPage.style.display = "none";
     resultsPage.style.display = "block";
   });
