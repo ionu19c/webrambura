@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const resultsPage = document.getElementById("resultsPage");
   const searchPage = document.getElementById("searchPage");
   const backBtn = document.getElementById("backBtn");
+  const errorBox = document.getElementById("errorMessage");
 
   const hotels = [
     { name: "Budget Inn", category: "💸 Smart Saver", price: 80 },
@@ -23,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     { name: "💎 Premium Escape", label: "Premium", sort: (a, b) => b.price - a.price }
   ];
 
+  // Handle form submission
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -30,14 +32,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const dateFrom = new Date(document.getElementById("dateFrom").value);
     const dateTo = new Date(document.getElementById("dateTo").value);
     const persons = parseInt(document.getElementById("persons").value);
-    const maxHotels = parseInt(document.getElementById("maxHotels").value || "2");
+    const maxHotels = parseInt(document.getElementById("maxHotels").value);
 
     const oneDay = 1000 * 60 * 60 * 24;
     const totalNights = Math.round((dateTo - dateFrom) / oneDay);
 
-    if (totalNights < 1 || isNaN(persons)) {
-      alert("Date invalide.");
+    if (totalNights < 1 || isNaN(persons) || isNaN(maxHotels)) {
+      errorBox.textContent = "Please enter a valid date range and number of guests.";
+      errorBox.style.display = "block";
       return;
+    } else {
+      errorBox.style.display = "none";
     }
 
     resultsDiv.innerHTML = "";
@@ -67,14 +72,14 @@ document.addEventListener("DOMContentLoaded", function () {
           <div>
             <h3>${hotel.name}</h3>
             <p>📍 ${dest}</p>
-            <p>🗓️ ${formatDate(currentStart)} → ${formatDate(endDate)} (${nights} nopți)</p>
-            <p>💶 ${hotel.price}€/noapte × ${nights} × ${persons} pers = <strong>${subtotal}€</strong></p>
+            <p>🗓️ ${formatDate(currentStart)} → ${formatDate(endDate)} (${nights} nights)</p>
+            <p>💶 ${hotel.price}€/night × ${nights} × ${persons} guest(s) = <strong>${subtotal}€</strong></p>
           </div><hr/>
         `;
         currentStart = endDate;
       });
 
-      categoryOutput += `<h3>💰 Total ${cat.label}: ${categoryCost}€</h3><br/>`;
+      categoryOutput += `<h3>💰 Total for ${cat.label}: ${categoryCost}€</h3><br/>`;
       resultsDiv.innerHTML += categoryOutput;
     });
 
@@ -82,6 +87,23 @@ document.addEventListener("DOMContentLoaded", function () {
     resultsPage.style.display = "block";
   });
 
+  // Stepper buttons logic
+  document.querySelectorAll(".step-btn").forEach(button => {
+    button.addEventListener("click", function () {
+      const targetId = this.getAttribute("data-target");
+      const input = document.getElementById(targetId);
+      let value = parseInt(input.value) || 1;
+
+      if (this.dataset.action === "increase") {
+        if (targetId === "maxHotels" && value >= 5) return;
+        input.value = value + 1;
+      } else {
+        if (value > 1) input.value = value - 1;
+      }
+    });
+  });
+
+  // Back button
   backBtn.addEventListener("click", function () {
     resultsPage.style.display = "none";
     searchPage.style.display = "block";
