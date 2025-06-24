@@ -12,66 +12,65 @@ document.addEventListener("DOMContentLoaded", function () {
       category: "💸 Smart Saver",
       price: 80,
       rating: 7.8,
-      image: "https://source.unsplash.com/400x250/?budget,hotel"
+      image: "https://images.unsplash.com/photo-1590490360184-0273d39d96e3?auto=format&fit=crop&w=400&q=80"
     },
     {
       name: "Saver Stay",
       category: "💸 Smart Saver",
       price: 75,
       rating: 8.1,
-      image: "https://source.unsplash.com/400x250/?affordable,hotel"
+      image: "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=400&q=80"
     },
     {
       name: "Value Lodge",
       category: "💸 Smart Saver",
       price: 85,
       rating: 7.5,
-      image: "https://source.unsplash.com/400x250/?simple,hotel"
+      image: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4?auto=format&fit=crop&w=400&q=80"
     },
     {
       name: "Urban Rest",
       category: "⚖️ Balanced Choice",
       price: 110,
       rating: 8.6,
-      image: "https://source.unsplash.com/400x250/?urban,hotel"
+      image: "https://images.unsplash.com/photo-1618773928121-c32242e63f0c?auto=format&fit=crop&w=400&q=80"
     },
     {
       name: "Comfort Square",
       category: "⚖️ Balanced Choice",
       price: 105,
       rating: 8.2,
-      image: "https://source.unsplash.com/400x250/?comfort,hotel"
+      image: "https://images.unsplash.com/photo-1615776210263-3d2ebd7f662b?auto=format&fit=crop&w=400&q=80"
     },
     {
       name: "MidTown Hotel",
       category: "⚖️ Balanced Choice",
       price: 115,
       rating: 8.9,
-      image: "https://source.unsplash.com/400x250/?downtown,hotel"
+      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=400&q=80"
     },
     {
       name: "Grand Brambura",
       category: "💎 Premium Escape",
       price: 160,
       rating: 9.2,
-      image: "https://source.unsplash.com/400x250/?luxury,hotel"
+      image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=400&q=80"
     },
     {
       name: "Royal Retreat",
       category: "💎 Premium Escape",
       price: 180,
       rating: 9.0,
-      image: "https://source.unsplash.com/400x250/?spa,resort"
+      image: "https://images.unsplash.com/photo-1552903023-4cdd7fc1d9b2?auto=format&fit=crop&w=400&q=80"
     },
     {
       name: "Luxury Loft",
       category: "💎 Premium Escape",
       price: 175,
       rating: 8.7,
-      image: "https://source.unsplash.com/400x250/?boutique,hotel"
+      image: "https://images.unsplash.com/photo-1621390099993-d3ee886e1bd1?auto=format&fit=crop&w=400&q=80"
     }
   ];
-
   const categories = [
     {
       name: "💸 Smart Saver",
@@ -116,7 +115,6 @@ document.addEventListener("DOMContentLoaded", function () {
       `${d.getDate().toString().padStart(2, "0")}.${(d.getMonth() + 1)
         .toString()
         .padStart(2, "0")}`;
-
     categories.forEach(cat => {
       const matching = hotels.filter(h => h.category === cat.name).sort(cat.sort);
       const selected = matching.slice(0, maxHotels);
@@ -132,10 +130,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const nights = perHotelNights + (i < extra ? 1 : 0);
         const endDate = new Date(currentStart);
         endDate.setDate(currentStart.getDate() + nights);
-
         const subtotal = hotel.price * nights * persons;
         categoryCost += subtotal;
-
         const ratingInfo = getRatingLabel(hotel.rating);
 
         categoryOutput += `
