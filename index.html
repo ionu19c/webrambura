@@ -18,36 +18,48 @@
 </head>
 <body>
   <div id="searchPage">
-    <h1>Travel your way. Mix your stay.</h1>
+    <h1>We are Brambura</h1>
+    <h2>Travel your way. Mix your stay.</h2>
+
     <form id="stayForm">
-      <label>Destination:
+      <div class="form-row">
+        <label for="dest">Destination:</label>
         <input type="text" id="dest" required />
-      </label><br />
+      </div>
 
-      <label>Check-in date:
+      <div class="form-row">
+        <label for="dateFrom">Check-in date:</label>
         <input type="date" id="dateFrom" required />
-      </label><br />
+      </div>
 
-      <label>Check-out date:
+      <div class="form-row">
+        <label for="dateTo">Check-out date:</label>
         <input type="date" id="dateTo" required />
-      </label><br />
+      </div>
 
-      <label>Guests:
-        <button type="button" class="step-btn" data-action="decrease" data-target="persons">–</button>
-        <input type="number" id="persons" value="1" min="1" />
-        <button type="button" class="step-btn" data-action="increase" data-target="persons">+</button>
-      </label><br />
+      <div class="form-row inline-row">
+        <label for="persons">Guests:</label>
+        <div class="step-wrapper">
+          <button type="button" class="step-btn" data-action="decrease" data-target="persons">–</button>
+          <input type="number" id="persons" value="1" min="1" />
+          <button type="button" class="step-btn" data-action="increase" data-target="persons">+</button>
+        </div>
+      </div>
 
-      <label>Max hotels per category:
-        <button type="button" class="step-btn" data-action="decrease" data-target="maxHotels">–</button>
-        <input type="number" id="maxHotels" value="2" min="1" max="5" />
-        <button type="button" class="step-btn" data-action="increase" data-target="maxHotels">+</button>
-      </label><br />
+      <div class="form-row inline-row">
+        <label for="maxHotels">Max hotels per category:</label>
+        <div class="step-wrapper">
+          <button type="button" class="step-btn" data-action="decrease" data-target="maxHotels">–</button>
+          <input type="number" id="maxHotels" value="2" min="1" max="5" />
+          <button type="button" class="step-btn" data-action="increase" data-target="maxHotels">+</button>
+        </div>
+      </div>
 
       <button type="submit">Find your plan</button>
       <div id="errorMessage"></div>
     </form>
   </div>
+
   <div id="resultsPage" style="display:none;">
     <div id="results"></div>
     <button id="backBtn">🔙 Back</button>
