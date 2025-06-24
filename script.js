@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
       price: 80,
       rating: 7.8,
       image: "images/IMG_7746.jpeg",
-      lat: 48.8591, lng: 2.3415
+      lat: 48.8591,
+      lng: 2.3415
     },
     {
       name: "Saver Stay",
@@ -21,7 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
       price: 75,
       rating: 8.1,
       image: "images/IMG_7747.jpeg",
-      lat: 48.8602, lng: 2.3468
+      lat: 48.8602,
+      lng: 2.3468
     },
     {
       name: "Value Lodge",
@@ -29,7 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
       price: 85,
       rating: 7.5,
       image: "images/IMG_7748.jpeg",
-      lat: 48.8574, lng: 2.3389
+      lat: 48.8574,
+      lng: 2.3389
     },
     {
       name: "Urban Rest",
@@ -37,7 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
       price: 110,
       rating: 8.6,
       image: "images/IMG_7749.jpeg",
-      lat: 48.8552, lng: 2.3537
+      lat: 48.8552,
+      lng: 2.3537
     },
     {
       name: "Comfort Square",
@@ -45,7 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
       price: 105,
       rating: 8.2,
       image: "images/IMG_7750.jpeg",
-      lat: 48.8585, lng: 2.3552
+      lat: 48.8585,
+      lng: 2.3552
     },
     {
       name: "MidTown Hotel",
@@ -53,7 +58,8 @@ document.addEventListener("DOMContentLoaded", function () {
       price: 115,
       rating: 8.9,
       image: "images/IMG_7751.jpeg",
-      lat: 48.8561, lng: 2.3491
+      lat: 48.8561,
+      lng: 2.3491
     },
     {
       name: "Grand Brambura",
@@ -61,7 +67,8 @@ document.addEventListener("DOMContentLoaded", function () {
       price: 160,
       rating: 9.2,
       image: "images/IMG_7752.jpeg",
-      lat: 48.8579, lng: 2.3591
+      lat: 48.8579,
+      lng: 2.3591
     },
     {
       name: "Royal Retreat",
@@ -69,7 +76,8 @@ document.addEventListener("DOMContentLoaded", function () {
       price: 180,
       rating: 9.0,
       image: "images/IMG_7753.jpeg",
-      lat: 48.8544, lng: 2.3572
+      lat: 48.8544,
+      lng: 2.3572
     },
     {
       name: "Luxury Loft",
@@ -77,7 +85,8 @@ document.addEventListener("DOMContentLoaded", function () {
       price: 175,
       rating: 8.7,
       image: "images/IMG_7754.jpeg",
-      lat: 48.8567, lng: 2.3544
+      lat: 48.8567,
+      lng: 2.3544
     }
   ];
 
@@ -124,7 +133,6 @@ document.addEventListener("DOMContentLoaded", function () {
       `${d.getDate().toString().padStart(2, "0")}.${(d.getMonth() + 1)
         .toString()
         .padStart(2, "0")}`;
-
     categories.forEach(cat => {
       const matching = hotels.filter(h => h.category === cat.name).sort(cat.sort);
       const selected = matching.slice(0, maxHotels);
