@@ -140,3 +140,20 @@ button:hover {
     opacity: 1;
   }
 }
+.rating {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.rating.excellent {
+  color: #2e7d32; /* verde închis */
+}
+.rating.very-good {
+  color: #0277bd; /* albastru */
+}
+.rating.good {
+  color: #f9a825; /* galben/portocaliu */
+}
+.rating.average {
+  color: #e65100; /* portocaliu închis */
+}
