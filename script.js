@@ -45,7 +45,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     resultsDiv.innerHTML = "";
-    const formatDate = d => `${d.getDate().toString().padStart(2, "0")}.${(d.getMonth() + 1).toString().padStart(2, "0")}`;
+
+    const formatDate = d =>
+      `${d.getDate().toString().padStart(2, "0")}.${(d.getMonth() + 1).toString().padStart(2, "0")}`;
 
     categories.forEach(cat => {
       const matching = hotels.filter(h => h.category === cat.name).sort(cat.sort);
@@ -66,10 +68,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const subtotal = hotel.price * nights * persons;
         categoryCost += subtotal;
 
-        const ratingLabel = getRatingLabel(hotel.rating);
+        const ratingInfo = getRatingLabel(hotel.rating);
+
         categoryOutput += `
           <div>
-            <div class="rating ${ratingLabel.class}">⭐ ${hotel.rating} – ${ratingLabel.text}</div>
+            <div class="rating ${ratingInfo.class}">⭐ ${hotel.rating} – ${ratingInfo.text}</div>
             <h3>${hotel.name}</h3>
             <p>📍 ${dest}</p>
             <p>🗓️ ${formatDate(currentStart)} → ${formatDate(endDate)} (${nights} nights)</p>
@@ -110,4 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function getRatingLabel(score) {
     if (score >= 9.0) return { text: "Excellent", class: "excellent" };
     if (score >= 8.0) return { text: "Very Good", class: "very-good" };
-    if (score >= 7.0) return { text: " [A](https://github.com/Ronnie434/30-days-of-React/tree/22142106cb46f717a1259f84227cc90ed7fe50cc/02_Day_Introduction_to_React%2F02_introduction_to_react.md?copilot_analytics_metadata=eyJldmVudEluZm9fY2xpY2tTb3VyY2UiOiJjaXRhdGlvbkxpbmsiLCJldmVudEluZm9fbWVzc2FnZUlkIjoiNGExYmV2VEFxODRlSmpEOGl6SDM4IiwiZXZlbnRJbmZvX2NsaWNrRGVzdGluYXRpb24iOiJodHRwczpcL1wvZ2l0aHViLmNvbVwvUm9ubmllNDM0XC8zMC1kYXlzLW9mLVJlYWN0XC90cmVlXC8yMjE0MjEwNmNiNDZmNzE3YTEyNTlmODQyMjdjYzkwZWQ3ZmU1MGNjXC8wMl9EYXlfSW50cm9kdWN0aW9uX3RvX1JlYWN0JTJGMDJfaW50cm9kdWN0aW9uX3RvX3JlYWN0Lm1kIiwiZXZlbnRJbmZvX2NvbnZlcnNhdGlvbklkIjoiUWJ5dzJGamdnc2dQcVNMTUtIaTd4In0%3D&citationMarker=9F742443-6C92-4C44-BF58-8F5A7C53B6F1)
+    if (score >= 7.0) return { text: "Good", class: "good" };
+    return { text: "Average", class: "average" };
+  }
+});
