@@ -33,8 +33,7 @@ form label {
 }
 
 input[type="text"],
-input[type="date"],
-input[type="number"] {
+input[type="date"] {
   width: 100%;
   padding: 8px 12px;
   border: 1px solid #ccc;
@@ -75,12 +74,45 @@ button:hover {
   border-left: 4px solid #ccc;
   border-radius: 6px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
 }
 
 #results hr {
   border: none;
   border-top: 1px solid #eee;
   margin: 15px 0;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.stepper input {
+  width: 50px;
+  text-align: center;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px;
+  background: #fefefe;
+}
+
+.stepper .step-btn {
+  background-color: #eee;
+  border: none;
+  padding: 6px 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.stepper .step-btn:hover {
+  background-color: #ddd;
 }
 
 @media screen and (max-width: 600px) {
@@ -95,5 +127,16 @@ button:hover {
 
   button {
     width: 100%;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
