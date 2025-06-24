@@ -142,8 +142,8 @@ document.addEventListener("DOMContentLoaded", function () {
             <p>📍 ${dest}</p>
             <p>🗓️ ${formatDate(currentStart)} → ${formatDate(endDate)} (${nights} nights)</p>
             <p>💶 ${hotel.price}€/night × ${nights} × ${persons} guest(s) = <strong>${subtotal}€</strong></p>
-          </div><hr/>
-        `;
+          </div><hr/>`;
+
         currentStart = endDate;
       });
 
