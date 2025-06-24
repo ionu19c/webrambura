@@ -7,21 +7,87 @@ document.addEventListener("DOMContentLoaded", function () {
   const errorBox = document.getElementById("errorMessage");
 
   const hotels = [
-    { name: "Budget Inn", category: "💸 Smart Saver", price: 80, rating: 7.8 },
-    { name: "Saver Stay", category: "💸 Smart Saver", price: 75, rating: 8.1 },
-    { name: "Value Lodge", category: "💸 Smart Saver", price: 85, rating: 7.5 },
-    { name: "Urban Rest", category: "⚖️ Balanced Choice", price: 110, rating: 8.6 },
-    { name: "Comfort Square", category: "⚖️ Balanced Choice", price: 105, rating: 8.2 },
-    { name: "MidTown Hotel", category: "⚖️ Balanced Choice", price: 115, rating: 8.9 },
-    { name: "Grand Brambura", category: "💎 Premium Escape", price: 160, rating: 9.2 },
-    { name: "Royal Retreat", category: "💎 Premium Escape", price: 180, rating: 9.0 },
-    { name: "Luxury Loft", category: "💎 Premium Escape", price: 175, rating: 8.7 }
+    {
+      name: "Budget Inn",
+      category: "💸 Smart Saver",
+      price: 80,
+      rating: 7.8,
+      image: "https://source.unsplash.com/400x250/?budget,hotel"
+    },
+    {
+      name: "Saver Stay",
+      category: "💸 Smart Saver",
+      price: 75,
+      rating: 8.1,
+      image: "https://source.unsplash.com/400x250/?affordable,hotel"
+    },
+    {
+      name: "Value Lodge",
+      category: "💸 Smart Saver",
+      price: 85,
+      rating: 7.5,
+      image: "https://source.unsplash.com/400x250/?simple,hotel"
+    },
+    {
+      name: "Urban Rest",
+      category: "⚖️ Balanced Choice",
+      price: 110,
+      rating: 8.6,
+      image: "https://source.unsplash.com/400x250/?urban,hotel"
+    },
+    {
+      name: "Comfort Square",
+      category: "⚖️ Balanced Choice",
+      price: 105,
+      rating: 8.2,
+      image: "https://source.unsplash.com/400x250/?comfort,hotel"
+    },
+    {
+      name: "MidTown Hotel",
+      category: "⚖️ Balanced Choice",
+      price: 115,
+      rating: 8.9,
+      image: "https://source.unsplash.com/400x250/?downtown,hotel"
+    },
+    {
+      name: "Grand Brambura",
+      category: "💎 Premium Escape",
+      price: 160,
+      rating: 9.2,
+      image: "https://source.unsplash.com/400x250/?luxury,hotel"
+    },
+    {
+      name: "Royal Retreat",
+      category: "💎 Premium Escape",
+      price: 180,
+      rating: 9.0,
+      image: "https://source.unsplash.com/400x250/?spa,resort"
+    },
+    {
+      name: "Luxury Loft",
+      category: "💎 Premium Escape",
+      price: 175,
+      rating: 8.7,
+      image: "https://source.unsplash.com/400x250/?boutique,hotel"
+    }
   ];
 
   const categories = [
-    { name: "💸 Smart Saver", label: "Smart Saver", sort: (a, b) => a.price - b.price },
-    { name: "⚖️ Balanced Choice", label: "Balanced", sort: (a, b) => a.price - b.price },
-    { name: "💎 Premium Escape", label: "Premium", sort: (a, b) => b.price - a.price }
+    {
+      name: "💸 Smart Saver",
+      label: "Smart Saver",
+      sort: (a, b) => a.price - b.price
+    },
+    {
+      name: "⚖️ Balanced Choice",
+      label: "Balanced",
+      sort: (a, b) => a.price - b.price
+    },
+    {
+      name: "💎 Premium Escape",
+      label: "Premium",
+      sort: (a, b) => b.price - a.price
+    }
   ];
 
   form.addEventListener("submit", function (e) {
@@ -47,7 +113,9 @@ document.addEventListener("DOMContentLoaded", function () {
     resultsDiv.innerHTML = "";
 
     const formatDate = d =>
-      `${d.getDate().toString().padStart(2, "0")}.${(d.getMonth() + 1).toString().padStart(2, "0")}`;
+      `${d.getDate().toString().padStart(2, "0")}.${(d.getMonth() + 1)
+        .toString()
+        .padStart(2, "0")}`;
 
     categories.forEach(cat => {
       const matching = hotels.filter(h => h.category === cat.name).sort(cat.sort);
@@ -72,6 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         categoryOutput += `
           <div>
+            <img src="${hotel.image}" alt="${hotel.name}" class="hotel-image" />
             <div class="rating ${ratingInfo.class}">⭐ ${hotel.rating} – ${ratingInfo.text}</div>
             <h3>${hotel.name}</h3>
             <p>📍 ${dest}</p>
