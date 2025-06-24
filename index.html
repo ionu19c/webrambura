@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Planificator Brambura</title>
+  <title>Brambura Planner</title>
 
   <!-- Leaflet.js -->
   <link
@@ -18,29 +18,39 @@
 </head>
 <body>
   <div id="searchPage">
-    <h1>🔍 Planifică-ți cazarea cu Brambura</h1>
+    <h1>Travel your way. Mix your stay.</h1>
     <form id="stayForm">
-      <label>Destinație: <input type="text" id="dest" required /></label><br />
-      <label>Data check-in: <input type="date" id="dateFrom" required /></label><br />
-      <label>Data check-out: <input type="date" id="dateTo" required /></label><br />
-      <label>Nr. persoane: 
+      <label>Destination:
+        <input type="text" id="dest" required />
+      </label><br />
+
+      <label>Check-in date:
+        <input type="date" id="dateFrom" required />
+      </label><br />
+
+      <label>Check-out date:
+        <input type="date" id="dateTo" required />
+      </label><br />
+
+      <label>Guests:
         <button type="button" class="step-btn" data-action="decrease" data-target="persons">–</button>
         <input type="number" id="persons" value="1" min="1" />
         <button type="button" class="step-btn" data-action="increase" data-target="persons">+</button>
       </label><br />
-      <label>Hoteluri max. / categorie:
+
+      <label>Max hotels per category:
         <button type="button" class="step-btn" data-action="decrease" data-target="maxHotels">–</button>
         <input type="number" id="maxHotels" value="2" min="1" max="5" />
         <button type="button" class="step-btn" data-action="increase" data-target="maxHotels">+</button>
       </label><br />
-      <button type="submit">🔎 Găsește cazare</button>
+
+      <button type="submit">Find your plan</button>
       <div id="errorMessage"></div>
     </form>
   </div>
-
   <div id="resultsPage" style="display:none;">
     <div id="results"></div>
-    <button id="backBtn">🔙 Înapoi</button>
+    <button id="backBtn">🔙 Back</button>
   </div>
 
   <script src="script.js"></script>
