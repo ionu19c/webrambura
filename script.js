@@ -12,65 +12,75 @@ document.addEventListener("DOMContentLoaded", function () {
       category: "💸 Smart Saver",
       price: 80,
       rating: 7.8,
-      image: "images/IMG_7746.jpeg"
+      image: "images/IMG_7746.jpeg",
+      lat: 48.8591, lng: 2.3415
     },
     {
       name: "Saver Stay",
       category: "💸 Smart Saver",
       price: 75,
       rating: 8.1,
-      image: "images/IMG_7747.jpeg"
+      image: "images/IMG_7747.jpeg",
+      lat: 48.8602, lng: 2.3468
     },
     {
       name: "Value Lodge",
       category: "💸 Smart Saver",
       price: 85,
       rating: 7.5,
-      image: "images/IMG_7748.jpeg"
+      image: "images/IMG_7748.jpeg",
+      lat: 48.8574, lng: 2.3389
     },
     {
       name: "Urban Rest",
       category: "⚖️ Balanced Choice",
       price: 110,
       rating: 8.6,
-      image: "images/IMG_7749.jpeg"
+      image: "images/IMG_7749.jpeg",
+      lat: 48.8552, lng: 2.3537
     },
     {
       name: "Comfort Square",
       category: "⚖️ Balanced Choice",
       price: 105,
       rating: 8.2,
-      image: "images/IMG_7750.jpeg"
+      image: "images/IMG_7750.jpeg",
+      lat: 48.8585, lng: 2.3552
     },
     {
       name: "MidTown Hotel",
       category: "⚖️ Balanced Choice",
       price: 115,
       rating: 8.9,
-      image: "images/IMG_7751.jpeg"
+      image: "images/IMG_7751.jpeg",
+      lat: 48.8561, lng: 2.3491
     },
     {
       name: "Grand Brambura",
       category: "💎 Premium Escape",
       price: 160,
       rating: 9.2,
-      image: "images/IMG_7752.jpeg"
+      image: "images/IMG_7752.jpeg",
+      lat: 48.8579, lng: 2.3591
     },
     {
       name: "Royal Retreat",
       category: "💎 Premium Escape",
       price: 180,
       rating: 9.0,
-      image: "images/IMG_7753.jpeg"
+      image: "images/IMG_7753.jpeg",
+      lat: 48.8544, lng: 2.3572
     },
     {
       name: "Luxury Loft",
       category: "💎 Premium Escape",
       price: 175,
       rating: 8.7,
-      image: "images/IMG_7754.jpeg"
+      image: "images/IMG_7754.jpeg",
+      lat: 48.8567, lng: 2.3544
     }
   ];
+
   const categories = [
     {
       name: "💸 Smart Saver",
@@ -97,7 +107,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const dateTo = new Date(document.getElementById("dateTo").value);
     const persons = parseInt(document.getElementById("persons").value);
     const maxHotels = parseInt(document.getElementById("maxHotels").value);
-
     const oneDay = 1000 * 60 * 60 * 24;
     const totalNights = Math.round((dateTo - dateFrom) / oneDay);
 
@@ -115,6 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
       `${d.getDate().toString().padStart(2, "0")}.${(d.getMonth() + 1)
         .toString()
         .padStart(2, "0")}`;
+
     categories.forEach(cat => {
       const matching = hotels.filter(h => h.category === cat.name).sort(cat.sort);
       const selected = matching.slice(0, maxHotels);
@@ -125,6 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
       let currentStart = new Date(dateFrom);
       let categoryOutput = `<h2>${cat.name} – ${cat.label}</h2>`;
       let categoryCost = 0;
+      const markerData = [];
 
       selected.forEach((hotel, i) => {
         const nights = perHotelNights + (i < extra ? 1 : 0);
@@ -144,13 +155,31 @@ document.addEventListener("DOMContentLoaded", function () {
             <p>💶 ${hotel.price}€/night × ${nights} × ${persons} guest(s) = <strong>${subtotal}€</strong></p>
           </div><hr/>`;
 
+        markerData.push({
+          lat: hotel.lat,
+          lng: hotel.lng,
+          name: hotel.name
+        });
+
         currentStart = endDate;
       });
 
+      const mapId = `map-${cat.label.toLowerCase()}`;
+      categoryOutput += `<div id="${mapId}" class="category-map"></div>`;
       categoryOutput += `<h3>💰 Total for ${cat.label}: ${categoryCost}€</h3><br/>`;
       resultsDiv.innerHTML += categoryOutput;
-    });
 
+      setTimeout(() => {
+        const center = markerData[0];
+        const map = L.map(mapId).setView([center.lat, center.lng], 14);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        markerData.forEach(m => {
+          L.marker([m.lat, m.lng]).addTo(map).bindPopup(m.name);
+        });
+      }, 0);
+    });
     searchPage.style.display = "none";
     resultsPage.style.display = "block";
   });
