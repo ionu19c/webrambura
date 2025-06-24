@@ -7,15 +7,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const errorBox = document.getElementById("errorMessage");
 
   const hotels = [
-    { name: "Budget Inn", category: "💸 Smart Saver", price: 80 },
-    { name: "Saver Stay", category: "💸 Smart Saver", price: 75 },
-    { name: "Value Lodge", category: "💸 Smart Saver", price: 85 },
-    { name: "Urban Rest", category: "⚖️ Balanced Choice", price: 110 },
-    { name: "Comfort Square", category: "⚖️ Balanced Choice", price: 105 },
-    { name: "MidTown Hotel", category: "⚖️ Balanced Choice", price: 115 },
-    { name: "Grand Brambura", category: "💎 Premium Escape", price: 160 },
-    { name: "Royal Retreat", category: "💎 Premium Escape", price: 180 },
-    { name: "Luxury Loft", category: "💎 Premium Escape", price: 175 }
+    { name: "Budget Inn", category: "💸 Smart Saver", price: 80, rating: 7.8 },
+    { name: "Saver Stay", category: "💸 Smart Saver", price: 75, rating: 8.1 },
+    { name: "Value Lodge", category: "💸 Smart Saver", price: 85, rating: 7.5 },
+    { name: "Urban Rest", category: "⚖️ Balanced Choice", price: 110, rating: 8.6 },
+    { name: "Comfort Square", category: "⚖️ Balanced Choice", price: 105, rating: 8.2 },
+    { name: "MidTown Hotel", category: "⚖️ Balanced Choice", price: 115, rating: 8.9 },
+    { name: "Grand Brambura", category: "💎 Premium Escape", price: 160, rating: 9.2 },
+    { name: "Royal Retreat", category: "💎 Premium Escape", price: 180, rating: 9.0 },
+    { name: "Luxury Loft", category: "💎 Premium Escape", price: 175, rating: 8.7 }
   ];
 
   const categories = [
@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
     { name: "💎 Premium Escape", label: "Premium", sort: (a, b) => b.price - a.price }
   ];
 
-  // Handle form submission
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -46,7 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     resultsDiv.innerHTML = "";
-
     const formatDate = d => `${d.getDate().toString().padStart(2, "0")}.${(d.getMonth() + 1).toString().padStart(2, "0")}`;
 
     categories.forEach(cat => {
@@ -68,8 +66,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const subtotal = hotel.price * nights * persons;
         categoryCost += subtotal;
 
+        const ratingLabel = getRatingLabel(hotel.rating);
         categoryOutput += `
           <div>
+            <div class="rating ${ratingLabel.class}">⭐ ${hotel.rating} – ${ratingLabel.text}</div>
             <h3>${hotel.name}</h3>
             <p>📍 ${dest}</p>
             <p>🗓️ ${formatDate(currentStart)} → ${formatDate(endDate)} (${nights} nights)</p>
@@ -87,7 +87,6 @@ document.addEventListener("DOMContentLoaded", function () {
     resultsPage.style.display = "block";
   });
 
-  // Stepper buttons logic
   document.querySelectorAll(".step-btn").forEach(button => {
     button.addEventListener("click", function () {
       const targetId = this.getAttribute("data-target");
@@ -103,9 +102,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Back button
   backBtn.addEventListener("click", function () {
     resultsPage.style.display = "none";
     searchPage.style.display = "block";
   });
-});
+
+  function getRatingLabel(score) {
+    if (score >= 9.0) return { text: "Excellent", class: "excellent" };
+    if (score >= 8.0) return { text: "Very Good", class: "very-good" };
+    if (score >= 7.0) return { text: " [A](https://github.com/Ronnie434/30-days-of-React/tree/22142106cb46f717a1259f84227cc90ed7fe50cc/02_Day_Introduction_to_React%2F02_introduction_to_react.md?copilot_analytics_metadata=eyJldmVudEluZm9fY2xpY2tTb3VyY2UiOiJjaXRhdGlvbkxpbmsiLCJldmVudEluZm9fbWVzc2FnZUlkIjoiNGExYmV2VEFxODRlSmpEOGl6SDM4IiwiZXZlbnRJbmZvX2NsaWNrRGVzdGluYXRpb24iOiJodHRwczpcL1wvZ2l0aHViLmNvbVwvUm9ubmllNDM0XC8zMC1kYXlzLW9mLVJlYWN0XC90cmVlXC8yMjE0MjEwNmNiNDZmNzE3YTEyNTlmODQyMjdjYzkwZWQ3ZmU1MGNjXC8wMl9EYXlfSW50cm9kdWN0aW9uX3RvX1JlYWN0JTJGMDJfaW50cm9kdWN0aW9uX3RvX3JlYWN0Lm1kIiwiZXZlbnRJbmZvX2NvbnZlcnNhdGlvbklkIjoiUWJ5dzJGamdnc2dQcVNMTUtIaTd4In0%3D&citationMarker=9F742443-6C92-4C44-BF58-8F5A7C53B6F1)
