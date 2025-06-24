@@ -12,63 +12,63 @@ document.addEventListener("DOMContentLoaded", function () {
       category: "💸 Smart Saver",
       price: 80,
       rating: 7.8,
-      image: "https://images.unsplash.com/photo-1590490360184-0273d39d96e3?auto=format&fit=crop&w=400&q=80"
+      image: "images/IMG_7746.jpeg"
     },
     {
       name: "Saver Stay",
       category: "💸 Smart Saver",
       price: 75,
       rating: 8.1,
-      image: "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=400&q=80"
+      image: "images/IMG_7747.jpeg"
     },
     {
       name: "Value Lodge",
       category: "💸 Smart Saver",
       price: 85,
       rating: 7.5,
-      image: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4?auto=format&fit=crop&w=400&q=80"
+      image: "images/IMG_7748.jpeg"
     },
     {
       name: "Urban Rest",
       category: "⚖️ Balanced Choice",
       price: 110,
       rating: 8.6,
-      image: "https://images.unsplash.com/photo-1618773928121-c32242e63f0c?auto=format&fit=crop&w=400&q=80"
+      image: "images/IMG_7749.jpeg"
     },
     {
       name: "Comfort Square",
       category: "⚖️ Balanced Choice",
       price: 105,
       rating: 8.2,
-      image: "https://images.unsplash.com/photo-1615776210263-3d2ebd7f662b?auto=format&fit=crop&w=400&q=80"
+      image: "images/IMG_7750.jpeg"
     },
     {
       name: "MidTown Hotel",
       category: "⚖️ Balanced Choice",
       price: 115,
       rating: 8.9,
-      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=400&q=80"
+      image: "images/IMG_7751.jpeg"
     },
     {
       name: "Grand Brambura",
       category: "💎 Premium Escape",
       price: 160,
       rating: 9.2,
-      image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=400&q=80"
+      image: "images/IMG_7752.jpeg"
     },
     {
       name: "Royal Retreat",
       category: "💎 Premium Escape",
       price: 180,
       rating: 9.0,
-      image: "https://images.unsplash.com/photo-1552903023-4cdd7fc1d9b2?auto=format&fit=crop&w=400&q=80"
+      image: "images/IMG_7753.jpeg"
     },
     {
       name: "Luxury Loft",
       category: "💎 Premium Escape",
       price: 175,
       rating: 8.7,
-      image: "https://images.unsplash.com/photo-1621390099993-d3ee886e1bd1?auto=format&fit=crop&w=400&q=80"
+      image: "images/IMG_7754.jpeg"
     }
   ];
   const categories = [
