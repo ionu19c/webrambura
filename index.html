@@ -22,11 +22,19 @@
     <label for="dateTo">To:</label>
     <input type="date" id="dateTo" required />
 
-    <label for="persons">Number of guests:</label>
-    <input type="number" id="persons" min="1" value="1" step="1" required />
+    <label>Number of guests:</label>
+    <div class="stepper">
+      <button type="button" class="step-btn" data-target="persons" data-action="decrease">−</button>
+      <input type="text" id="persons" value="1" readonly />
+      <button type="button" class="step-btn" data-target="persons" data-action="increase">+</button>
+    </div>
 
-    <label for="maxHotels">Max hotels to combine:</label>
-    <input type="number" id="maxHotels" min="1" max="5" value="2" step="1" required />
+    <label>Max hotels to combine:</label>
+    <div class="stepper">
+      <button type="button" class="step-btn" data-target="maxHotels" data-action="decrease">−</button>
+      <input type="text" id="maxHotels" value="2" readonly />
+      <button type="button" class="step-btn" data-target="maxHotels" data-action="increase">+</button>
+    </div>
 
     <button type="submit">Generate plans</button>
   </form>
