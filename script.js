@@ -25,12 +25,14 @@ document.addEventListener("DOMContentLoaded", function () {
       errorBox.style.display = "none";
     }
 
-    resultsDiv.innerHTML = `<p>Loading hotel results for ${dest}...</p>`;
+    // 👇 Loader + status text
+    resultsDiv.innerHTML = `
+      <div class="loader"></div>
+      <p>Searching for stays in <strong>${dest}</strong>...</p>
+    `;
 
     const formatDate = d =>
-      `${d.getDate().toString().padStart(2, "0")}.${(d.getMonth() + 1)
-        .toString()
-        .padStart(2, "0")}`;
+      `${d.getDate().toString().padStart(2, "0")}.${(d.getMonth() + 1).toString().padStart(2, "0")}`;
 
     const apiUrl = `https://brambura-server.onrender.com/api/hotels?city=${dest}&checkIn=${dateFrom.toISOString().split("T")[0]}&checkOut=${dateTo.toISOString().split("T")[0]}&adults=${persons}`;
 
@@ -39,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const data = await res.json();
 
       if (data.error || !data.data || data.data.length === 0) {
-        resultsDiv.innerHTML = `<p>😔 No hotels found for ${dest} between ${formatDate(dateFrom)} and ${formatDate(dateTo)}.</p>`;
+        resultsDiv.innerHTML = `<p>😔 No hotels found for <strong>${dest}</strong> between ${formatDate(dateFrom)} and ${formatDate(dateTo)}.</p>`;
         return;
       }
 
@@ -48,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       let markerData = [];
 
-      hotels.forEach((hotel, i) => {
+      hotels.forEach((hotel) => {
         const name = hotel.hotel.name || "Unnamed Hotel";
         const lat = hotel.hotel.latitude;
         const lng = hotel.hotel.longitude;
@@ -94,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     } catch (err) {
       console.error("API error:", err);
-      resultsDiv.innerHTML = `<p>🚨 An error occurred while fetching hotel data. Please try again later.</p>`;
+      resultsDiv.innerHTML = `<p>🚨 An error occurred while contacting the server. Please try again later.</p>`;
     }
   });
 
